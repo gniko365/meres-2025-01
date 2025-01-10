@@ -58,10 +58,24 @@ class program {
         }
         return null;
     }
-    
+
     static List<Sportolo> DobasEvben(List<Sportolo> sportolok, int ev)
     {
         return sportolok.Where(s => s.Datum.StartsWith(ev.ToString())).ToList();
     }
+
+    static void OrszagStatisztika(List<Sportolo> sportolok)
+    {
+        var statisztika = sportolok
+            .GroupBy(s => s.Orszagkod)
+            .Select(g => new { Orszag = g.Key, Db = g.Count() })
+            .OrderByDescending(s => s.Db);
+
+        foreach (var item in statisztika)
+        {
+            Console.WriteLine($"{item.Orszag}: {item.Db} dobás");
+        }
+    }
+
 }
 
