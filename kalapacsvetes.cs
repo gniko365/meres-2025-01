@@ -77,5 +77,23 @@ class program {
         }
     }
 
+static void MagyarokFajlba(List<Sportolo> sportolok, string fajlnev)
+    {
+        var magyarok = sportolok.Where(s => s.Orszagkod == "HUN").ToList();
+        using (StreamWriter writer = new StreamWriter(fajlnev))
+        {
+            writer.WriteLine("Helyezés;Eredmény;Név;Országkód;Helyszín;Dátum");
+            foreach (var sportolo in magyarok)
+            {
+                writer.WriteLine($"{sportolo.Helyezes};{sportolo.Eredmeny:F2};{sportolo.Nev};{sportolo.Orszagkod};{sportolo.Helyszin};{sportolo.Datum}");
+            }
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        string fajlnev = "kalapacsvetes.txt";
+        var sportolok = SportolokBeolvasasa(fajlnev);
+
 }
 
