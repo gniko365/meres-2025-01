@@ -58,5 +58,10 @@ class program {
         }
         return null;
     }
+    
+    static List<Sportolo> DobasEvben(List<Sportolo> sportolok, int ev)
+    {
+        return sportolok.Where(s => s.Datum.StartsWith(ev.ToString())).ToList();
+    }
 }
 
