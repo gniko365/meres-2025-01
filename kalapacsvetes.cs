@@ -43,5 +43,20 @@ class program {
         }
         return sportolok;
     }
+
+    static int HanyDobas(List<Sportolo> sportolok)
+    {
+        return sportolok.Count;
+    }
+
+     static double? MagyarAtlag(List<Sportolo> sportolok)
+    {
+        var magyarok = sportolok.Where(s => s.Orszagkod == "HUN").ToList();
+        if (magyarok.Any())
+        {
+            return Math.Round(magyarok.Average(s => s.Eredmeny), 2);
+        }
+        return null;
+    }
 }
 
