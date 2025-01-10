@@ -47,6 +47,9 @@ class program {
     static int HanyDobas(List<Sportolo> sportolok)
     {
         return sportolok.Count;
+
+         Console.WriteLine("4. feladat: Hány dobás eredménye található a forrásfájlban?");
+        Console.WriteLine(HanyDobas(sportolok));
     }
 
      static double? MagyarAtlag(List<Sportolo> sportolok)
@@ -57,11 +60,41 @@ class program {
             return Math.Round(magyarok.Average(s => s.Eredmeny), 2);
         }
         return null;
+
+         Console.WriteLine("5. feladat: Magyar sportolók dobásainak átlaga");
+        var atlag = MagyarAtlag(sportolok);
+        if (atlag.HasValue)
+        {
+            Console.WriteLine($"A magyar sportolók átlagos eredménye: {atlag.Value} m");
+        }
+        else
+        {
+            Console.WriteLine("Nincsenek magyar sportolók az adatokban.");
+        }
+
     }
 
     static List<Sportolo> DobasEvben(List<Sportolo> sportolok, int ev)
     {
         return sportolok.Where(s => s.Datum.StartsWith(ev.ToString())).ToList();
+
+        onsole.WriteLine("6. feladat: Adott év dobásai");
+        Console.Write("Kérem, adjon meg egy évszámot: ");
+        int ev = int.Parse(Console.ReadLine());
+        var evSportolok = DobasEvben(sportolok, ev);
+        if (evSportolok.Any())
+        {
+            Console.WriteLine($"{ev}-ben elért dobások száma: {evSportolok.Count}");
+            foreach (var s in evSportolok)
+            {
+                Console.WriteLine($"{s.Nev} - {s.Eredmeny} m");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"A {ev}-ben nem került be egyetlen dobás sem a legjobbak közé.");
+        }
+
     }
 
     static void OrszagStatisztika(List<Sportolo> sportolok)
@@ -74,6 +107,9 @@ class program {
         foreach (var item in statisztika)
         {
             Console.WriteLine($"{item.Orszag}: {item.Db} dobás");
+
+            Console.WriteLine("7. feladat: Országok statisztikája");
+        OrszagStatisztika(sportolok);
         }
     }
 
@@ -96,4 +132,9 @@ static void MagyarokFajlba(List<Sportolo> sportolok, string fajlnev)
         var sportolok = SportolokBeolvasasa(fajlnev);
 
 }
+}
+
+
+
+
 
